@@ -9,7 +9,7 @@
     npm install
     npm start
     ```
-    Than visit [localhost port 3000](http://localhost:3000/). 
+Than visit [localhost port 3000](http://localhost:3000/). 
 
 And for you easily to check the demo, i had already deploy it to Vercel. 
 So you can simply visit [Demohere](https://99tech-demo.vercel.app) and test the product
