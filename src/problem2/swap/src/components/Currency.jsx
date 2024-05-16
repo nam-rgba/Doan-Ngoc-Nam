@@ -2,14 +2,36 @@ import React from 'react'
 import { FaCaretDown } from "react-icons/fa";
 import { useDropdown } from '../hooks/useDropdown';
 import './sc.css'
-import { seperateNumber } from '../utils/utils';
+import { seperateNumber, dateFomart } from '../utils/utils';
+import { motion } from "framer-motion"
+import { useState, useEffect } from 'react';
 
 
-export default function Currency({currency, changeCurrency, allCurrencies, init, setInit}) {
+
+export default function Currency({currency, changeCurrency, allCurrencies,isTarget, init, setInit}) {
     
     const [isOpen, dropdownRef, toggleDropdown] = useDropdown(false);
     const [isFocus, focusRef, toggleFocus] = useDropdown(false);
-    const [bef, aft] = seperateNumber(init*currency.price);
+    const [curent, setCurent] = useState(
+        isTarget?init/currency.price:1
+    )
+
+    useEffect(()=>{
+        setCurent(init/currency.price)
+    },[init, currency.price])
+
+
+
+    const date = dateFomart(currency.date);
+
+
+    let [bef, aft] = seperateNumber(
+        init / currency.price
+    );
+
+    useEffect(()=>{
+
+    },[init, currency.price, isTarget])
 
   return (
     <div className='w-full h-[10rem] rounded-2xl bg-[#378ca1] p-4 text-white flex flex-col'>
@@ -22,15 +44,23 @@ export default function Currency({currency, changeCurrency, allCurrencies, init,
             <FaCaretDown size={20} className='pr-[0.3rem]' />
             {
                 isOpen && (
-                    <div className='absolute w-[7.4rem]  bg-[#006b8b] rounded-[0.4rem] top-10 left-0 h-[10rem] overflow-y-scroll' id='sc'>
+                    <motion.div initial={{height:0}} animate={{height:200   }} className='absolute w-[7.4rem]  bg-[#006b8b] rounded-[0.4rem] top-10 left-0 h-[10rem] overflow-y-scroll' id='sc'>
                         {
                             allCurrencies.map((coin, index)=>(
-                                <div key={index} onClick={()=>changeCurrency(coin)} className='w-full h-[2.1rem] bg-[#006b8b] cursor-pointer  flex flex-row items-center p-[0.3rem] hover:bg-[#378ca1]'>
+                                <div key={index} onClick={()=>{
+                                    if(!isTarget){
+                                        changeCurrency(coin);
+                                        setInit(curent*coin.price)
+                                    }else{
+                                        changeCurrency(coin)
+                                    }
+
+                                }} className='w-full h-[2.1rem] bg-[#006b8b] cursor-pointer  flex flex-row items-center p-[0.3rem] hover:bg-[#378ca1]'>
                                     {coin.currency}
                                 </div>
                             ))
                         }
-                    </div>
+                    </motion.div>
                 )
             }
         </div>
@@ -41,13 +71,12 @@ export default function Currency({currency, changeCurrency, allCurrencies, init,
                     ref={focusRef} 
                     className='bg-transparent w-full transition-all focus:outline-none text-3xl text-white border-b-2 border-[#006b8b]'
                     autoFocus
-                    value={
-                        currency.price*init
-                    }
+                    value={curent}
                     onChange={(e)=>
                         {
-                             let value = e.target.value
-                        setInit(value/currency.price)
+                            let temp=e.target.value
+                            setCurent(temp)
+                            setInit(temp*currency.price)
                         }
                     }
                     type='number'
@@ -60,6 +89,9 @@ export default function Currency({currency, changeCurrency, allCurrencies, init,
                     </div>
                 )
             }
+        </div>
+        <div className='mt-2 text-sm self-end place-content-end'>
+            {date}
         </div>
     </div>
   )
