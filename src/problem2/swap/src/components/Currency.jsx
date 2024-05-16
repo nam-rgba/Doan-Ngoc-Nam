@@ -69,7 +69,7 @@ export default function Currency({currency, changeCurrency, allCurrencies,isTarg
                 isFocus ? (
                     <input 
                     ref={focusRef} 
-                    className='bg-transparent w-full transition-all focus:outline-none text-3xl text-white border-b-2 border-[#006b8b]'
+                    className='bg-transparent w-full transition-colors focus:outline-none text-3xl text-white border-b-2 border-[#4ec7ff]'
                     autoFocus
                     value={curent}
                     onChange={(e)=>
@@ -83,10 +83,10 @@ export default function Currency({currency, changeCurrency, allCurrencies,isTarg
                     step='any'
                     />
                 ) : (
-                    <div className='w-[8rem]  ' onClick={toggleFocus}>
+                    <motion.div initial={{opacity:0}} animate={{opacity:1}} className='w-[8rem]  ' onClick={toggleFocus}>
                         <div className='text-3xl'>{bef}.</div>
                         <div className='text-base'>{aft?aft:'00'}</div>
-                    </div>
+                    </motion.div>
                 )
             }
         </div>

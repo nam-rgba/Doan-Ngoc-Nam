@@ -15,3 +15,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.neonText {
+  text-shadow:
+    0 0 2px #fff,
+    0 0 5px #fff,
+    0 0 7px #fff,
+    0 0 10px #00a2ff,
+    0 0 20px #00a2ff,
+    0 0 31px #00a2ff,
+    0 0 44px #00a2ff,
+    0 0 55px #00a2ff;
+}

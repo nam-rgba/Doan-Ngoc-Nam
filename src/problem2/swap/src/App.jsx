@@ -1,6 +1,7 @@
 import Currency from "./components/Currency";
 import coins from './data/data.json'
 import { useState } from "react";
+import './index.css'
 import { CgArrowsExchange } from "react-icons/cg";
 function App() {
   const [source, setsource] = useState(coins[4])
@@ -14,7 +15,11 @@ function App() {
   return (
     <div className="w-full h-screen bg-[#ffffff] text-[#006b8b]">
       <div className="w-full h-[10%] border-b-2 border-[#e7f4fd] bg-white flex flex-row items-center pl-12">
-        99 techance
+        <div className="w-1/6 h-full text-[#0db2e4] font-bold text-2xl flex items-center">
+              <div className="neonText ">
+                99 TECHANCE
+              </div>
+        </div>
       </div>
       <div className="w-full h-[90%] flex flex-row items-center justify-center ">
         <div className="w-[80%] max-[400px]:w-[96%] h-[80%] bg-[#e7f4fd] rounded-xl flex flex-col justify-start border-[#006b8b] border-2">
