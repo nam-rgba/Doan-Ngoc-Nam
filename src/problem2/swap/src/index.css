@@ -27,3 +27,8 @@ code {
     0 0 44px #00a2ff,
     0 0 55px #00a2ff;
 }
+
+.blurred {
+  filter: blur(8px);
+  transition: filter 0.3s ease-in-out;
+}
